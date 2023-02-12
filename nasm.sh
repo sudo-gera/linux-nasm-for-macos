@@ -62,20 +62,20 @@ fi
 
 if [ "$_arch" == "32" ]
 then
-    _comm=$(cat "$_file" | base64)
-    _comm="echo "$_comm" | base64 -d > ./awesome_file.asm && nasm -felf32 awesome_file.asm -o a.o && ld -m elf_i386 a.o"
+    _comm=$(cat "$_file" | openssl base64)
+    _comm="echo "$_comm" | openssl base64 -d > ./awesome_file.asm && nasm -felf32 awesome_file.asm -o a.o && ld -m elf_i386 a.o"
     ssh "user@$_addr" "$_comm"
     ssh exec@$_addr
 elif [ "$_arch" == "64" ]
 then
-    _comm=$(cat "$_file" | base64)
-    _comm="echo "$_comm" | base64 -d > ./awesome_file.asm && nasm -felf64 awesome_file.asm -o a.o && ld -m elf_x86_64 a.o"
+    _comm=$(cat "$_file" | openssl base64)
+    _comm="echo "$_comm" | openssl base64 -d > ./awesome_file.asm && nasm -felf64 awesome_file.asm -o a.o && ld -m elf_x86_64 a.o"
     ssh "user@$_addr" "$_comm"
     ssh exec@$_addr
 elif [ "$_arch" == "64g" ]
 then
-    _comm=$(cat "$_file" | base64)
-    _comm="echo "$_comm" | base64 -d > ./awesome_file.asm && nasm -felf64 awesome_file.asm -o a.o && gcc -no-pie a.o"
+    _comm=$(cat "$_file" | openssl base64)
+    _comm="echo "$_comm" | openssl base64 -d > ./awesome_file.asm && nasm -felf64 awesome_file.asm -o a.o && gcc -no-pie a.o"
     ssh "user@$_addr" "$_comm"
     ssh exec@$_addr
 fi

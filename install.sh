@@ -2,7 +2,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 mkdir -p ~/.ssh/
 chmod 700 ~/.ssh
-cat "$SCRIPT_DIR/id_rsa_for_nasm.b64" | base64 -d > "$SCRIPT_DIR/id_rsa_for_nasm"
+cat "$SCRIPT_DIR/id_rsa_for_nasm.b64" | openssl base64 -d > "$SCRIPT_DIR/id_rsa_for_nasm"
 cp "$SCRIPT_DIR/id_rsa_for_nasm.pub" ~/.ssh/
 chmod 644 ~/.ssh/id_rsa_for_nasm.pub
 cp "$SCRIPT_DIR/id_rsa_for_nasm" ~/.ssh/
