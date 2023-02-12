@@ -1,6 +1,5 @@
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
-_addr=$("$SCRIPT_DIR/nasm_get_vm_address.sh")
+~/nasm_get_vm_address.sh
+_addr="$(cat ~/.nasm_vm_address.txt)"
 
 function usage(){
     echo -e "\x1b[94musage:\x1b[0m"
@@ -65,19 +64,19 @@ if [ "$_arch" == "32" ]
 then
     _comm=$(cat "$_file" | base64)
     _comm="echo "$_comm" | base64 -d > ./awesome_file.asm && nasm -felf32 awesome_file.asm -o a.o && ld -m elf_i386 a.o"
-    ssh "user@$_addr" $_comm
+    ssh "user@$_addr" "$_comm"
     ssh exec@$_addr
 elif [ "$_arch" == "64" ]
 then
     _comm=$(cat "$_file" | base64)
     _comm="echo "$_comm" | base64 -d > ./awesome_file.asm && nasm -felf64 awesome_file.asm -o a.o && ld -m elf_x86_64 a.o"
-    ssh "user@$_addr" $_comm
+    ssh "user@$_addr" "$_comm"
     ssh exec@$_addr
 elif [ "$_arch" == "64g" ]
 then
     _comm=$(cat "$_file" | base64)
     _comm="echo "$_comm" | base64 -d > ./awesome_file.asm && nasm -felf64 awesome_file.asm -o a.o && gcc -no-pie a.o"
-    ssh "user@$_addr" $_comm
+    ssh "user@$_addr" "$_comm"
     ssh exec@$_addr
 fi
 

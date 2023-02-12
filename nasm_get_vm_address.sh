@@ -21,6 +21,4 @@ do
     bad_addr
 done
 
-_addr="$(cat ~/.nasm_vm_address.txt)"
 
-echo "$_addr"

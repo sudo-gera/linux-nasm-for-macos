@@ -1,7 +1,4 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-echo "192.168.64.21" > ~/.nasm_vm_address.txt
-
-_addr=$("$SCRIPT_DIR/nasm_get_vm_address.sh")
 
 mkdir -p ~/.ssh/
 chmod 700 ~/.ssh
@@ -15,5 +12,8 @@ cp "$SCRIPT_DIR/nasm.sh" ~/
 chmod 744 ~/nasm.sh
 cp "$SCRIPT_DIR/nasm_get_vm_address.sh" ~/
 chmod 744 ~/nasm_get_vm_address.sh
+
+echo "192.168.64.21" > ~/.nasm_vm_address.txt
+~/nasm_get_vm_address.sh
 
 echo -e "\x1b[92mNice! Now you can use \x1b[94m~/nasm.sh\x1b[92m command! Let's run it now!\x1b[0m"
